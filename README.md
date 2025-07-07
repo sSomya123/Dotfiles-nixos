@@ -1,0 +1,1 @@
+Orignal dwm folder not working . SO use the dwm-dots folder instead and mannually clone the st and dmenu git from the suckless since there is no changes . I use rofi instead of dmenu and kitty instead of st terminal.
