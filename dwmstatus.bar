@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+dte() {
+    date "+ %A, %B %d - %H:%M"
+}
+
+# Battery function
+bat() {
+    if [[ -d /sys/class/power_supply/BAT0 ]]; then
+        capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+        status=$(cat /sys/class/power_supply/BAT0/status)
+        echo -n "🔋 ${capacity}% (${status})"
+    else
+        echo -n "🔋 N/A"
+    fi
+}
+
+# Memory function
+mem() {
+    read used total <<< $(free -m | awk '/^Mem:/ {print $3, $2}')
+    echo -n "󰍛 ${used}M / ${total}M"
+}
+sleep 5
+# Loop to update bar
+while true; do
+    xsetroot -name "| $(mem) | $(bat) | $(dte)"
+    sleep 10
+done
